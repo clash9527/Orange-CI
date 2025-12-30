@@ -251,26 +251,6 @@ jobs:
               "secret": "${{ env.CALLBACK_SECRET }}"
             }' || true
 
-      - name: Rename artifacts for custom build
-        if: ${{ env.TRADE_NO != '' }}
-        shell: bash
-        run: |
-          cd ./dist
-          DATE=$(date +%Y%m%d)
-          USER_ID="${{ env.USER_EMAIL }}"
-          USER_ID="${USER_ID%%@*}"
-          if [ -z "$USER_ID" ]; then
-            USER_ID="${{ env.TRADE_NO }}"
-          fi
-          for file in *; do
-            if [ -f "$file" ]; then
-              ext="${file##*.}"
-              newname="${USER_ID}_${DATE}_${{ matrix.platform_id }}.${ext}"
-              mv "$file" "$newname"
-              echo "✅ $file -> $newname"
-            fi
-          done
-
       - name: Upload
         uses: actions/upload-artifact@v4
         with:
