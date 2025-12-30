@@ -19,13 +19,17 @@ on:
         description: '用户邮箱（用于产物命名）'
         required: false
         type: string
+      callback_url:
+        description: '构建回调地址'
+        required: false
+        type: string
 
 env:
   IS_STABLE: ${{ !contains(github.ref, '-') }}
   SOURCE_BRANCH: ${{ github.event.inputs.source_branch || 'main' }}
   TRADE_NO: ${{ github.event.inputs.trade_no || '' }}
   USER_EMAIL: ${{ github.event.inputs.email || '' }}
-  CALLBACK_URL: ${{ secrets.BUILD_CALLBACK_URL }}
+  CALLBACK_URL: ${{ github.event.inputs.callback_url || '' }}
   CALLBACK_SECRET: ${{ secrets.BUILD_CALLBACK_SECRET }}
 
 jobs:
