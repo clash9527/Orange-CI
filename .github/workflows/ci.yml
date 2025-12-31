@@ -41,7 +41,8 @@ jobs:
         include:
           - platform: android
             os: ubuntu-latest
-            platform_id: android
+            arch: arm64
+            platform_id: android-arm64
           - platform: windows
             os: windows-2022
             arch: amd64
